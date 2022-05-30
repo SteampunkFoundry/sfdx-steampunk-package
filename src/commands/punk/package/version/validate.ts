@@ -18,33 +18,17 @@ export default class Validate extends SfdxCommand {
   public static examples = [messages.getMessage('commandExamples')];
 
   protected static flagsConfig = {
-    filepath: flags.filepath({
-      char: "f",
-      description: messages.getMessage('filepathFlagDescription'),
-      required: true,
-    }),
+    definitionfile: flags.filepath({
+      char: 'f',
+      description: messages.getMessage('definitionFile'),
+    })
   };
 
-  protected static requiresUsername = true;
-
-  private async readFile(filePath: string): Promise<any> {
-    let rows = [];
-
-    return new Promise<any>((resolve) => {
-      fs.createReadStream(filePath)
-        .pipe(csv())
-        .on("data", (data) => {
-          rows.push(data);
-        })
-        .on("end", () => {
-          resolve(rows);
-        });
-    });
-  }
+  protected static requiresDevhub = true;
 
   public async run(): Promise<any> {
-    // this.org is guaranteed because requiresUsername=true, as opposed to supportsUsername
-    const conn = this.org.getConnection();
+    // this.hubOrg is guaranteed because requiresDevhub=true, as opposed to supportsDevhub
+    const conn = this.hubOrg.getConnection();
 
     const csvFilePath = this.flags.filepath;
 

@@ -1,7 +1,6 @@
 module.exports = {
   commandDescription: `Validate a package version`,
-  filepathFlagDescription: `Path to csv file`,
-  errorNoOrgResults: `No results found for the org '%s'.`,
+  definitionFile: `Path to scratch org definition file`,
   commandExamples: [
     `$ sfdx punk:package:version:validate`,
     `$ sfdx punk:package:version:validate -f config/project-scratch-def.json`
