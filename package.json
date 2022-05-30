@@ -1,0 +1,68 @@
+{
+  "name": "@steampunk/sfdx-steampunk-package",
+  "description": "Steampunk's SFDX Package Plugin",
+  "version": "0.1.0",
+  "author": "Steampunk",
+  "license": "MIT",
+  "homepage": "https://github.com/SteampunkFoundry/sfdx-steampunk-package",
+  "repository": "SteampunkFoundry/sfdx-steampunk-package",
+  "bugs": "https://github.com/SteampunkFoundry/sfdx-steampunk-package/issues",
+  "keywords": [
+    "sfdx-plugin"
+  ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "/lib",
+    "/messages",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "sfdx",
+    "topics": {
+      "punk:package": {
+        "description": "Commands for working with packages."
+      }
+    },
+    "devPlugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "dependencies": {
+    "@oclif/command": "^1.8.16",
+    "@oclif/config": "^1.18.3",
+    "@oclif/errors": "^1.3.5",
+    "@salesforce/cli-plugins-testkit": "^1.5.35",
+    "@salesforce/command": "^4.2.1",
+    "@salesforce/core": "^2.35.3",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.26.10",
+    "@oclif/plugin-help": "^5.1.12",
+    "@oclif/test": "^2.1.0",
+    "@salesforce/dev-config": "^3.0.1",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^17.0.22",
+    "chai": "^4.3.6",
+    "globby": "^11.0.1",
+    "mocha": "^9.2.2",
+    "nyc": "^15.1.0",
+    "sinon": "^12.0.1",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  },
+  "scripts": {
+    "lint": "tslint --project . --config tslint.json --format stylish",
+    "postpack": "rimraf oclif.manifest.json",
+    "posttest": "tslint -p test -t stylish",
+    "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test-nut": "mocha **/*.nut.ts",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}
